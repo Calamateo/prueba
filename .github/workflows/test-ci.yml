@@ -19,11 +19,11 @@ jobs:
         ports:
           - '5506:3306'
         env:
-          - MYSQL_DATABASE=siiges_e2e
-          - MYSQL_USER=db_user
-          - MYSQL_PASSWORD=db_password
-          - MYSQL_ROOT_PASSWORD=root123
-          - MYSQL_PORT=3306
+          MYSQL_DATABASE: siiges_e2e
+          MYSQL_USER: db_user
+          MYSQL_PASSWORD: db_password
+          MYSQL_ROOT_PASSWORD: root123
+          MYSQL_PORT: 3306
 
     steps:
       - name: Checkout
