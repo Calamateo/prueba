@@ -27,13 +27,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: install
-        shell: bash
-        run: npm ci
-      - name: run e2e
-        shell: bash
-        run: npm run e2e:ci
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: yarn install
+      - name: Run e2e tests
+        run: yarn run e2e:ci
         env:
           SERVER_PORT: 3000
           SERVER_HOST: mysql-e2e
