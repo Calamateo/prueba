@@ -43,6 +43,7 @@ describe('test for users', () => {
       },
     );
     api = supertest(app);
+
     await upSeed();
   });
   describe('[POST] /api/v1/usuarios', () => {
@@ -51,6 +52,7 @@ describe('test for users', () => {
       const { body, statusCode } = await api.post('/api/v1/usuarios')
         .send(user)
         .set(apiKey);
+      console.log(body, statusCode);
       id = body.data.id;
       const data = await models.Usuario.findByPk(id);
       expect(statusCode).toEqual(201);
