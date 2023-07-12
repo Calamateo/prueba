@@ -38,7 +38,7 @@ jobs:
         run: yarn run e2e:ci
         env:
           SERVER_PORT: 9000
-          SERVER_HOST: mysql-e2e
+          SERVER_HOST: 127.0.0.1
           API_KEY: zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx
           AUTH_JWT_SECRET: 9fRk3VN4ugE6Ipjd0xBo25lyKGbnMAWe
           AUTH_JWT_ALGORITHM: RS256
