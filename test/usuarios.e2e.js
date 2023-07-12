@@ -38,7 +38,6 @@ describe('test for users', () => {
     app = await HttpServer.fastify.listen(
       {
         port: config.serverPort,
-        host: config.serverHost,
       },
     );
     api = supertest(app);
