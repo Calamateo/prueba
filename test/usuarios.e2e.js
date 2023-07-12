@@ -17,10 +17,8 @@ describe('test for users', () => {
   const {
     dbHost, dbPort, dbUser, dbPassword, dbName, dbAdmin,
   } = mysql;
-  const USER = encodeURIComponent(dbUser);
-  const PASSWORD = encodeURIComponent(dbPassword);
-  const URI = `${dbAdmin}://${USER}:${PASSWORD}@${dbHost}:${dbPort}/${dbName}`;
-  console.log(URI);
+  const URI = `${dbAdmin}://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
+  console.log(dbAdmin, dbUser, dbPassword, URI);
   // eslint-disable-next-line no-unused-vars
   let token = null;
   const user = {
