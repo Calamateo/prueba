@@ -43,7 +43,6 @@ describe('test for users', () => {
       },
     );
     api = supertest(app);
-
     await upSeed();
   });
   describe('[POST] /api/v1/usuarios', () => {
