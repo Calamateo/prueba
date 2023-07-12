@@ -51,3 +51,4 @@ jobs:
           DB_USER_MYSQL: db_user
           DB_PASSWORD_MYSQL: db_password
           DB_PORT_MYSQL: 5507
+          WHITE_LIST: mysql-e2e
