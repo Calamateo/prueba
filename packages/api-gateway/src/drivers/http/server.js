@@ -18,7 +18,7 @@ const fastify = Fastify({
       allErrors: true,
     },
   },
-  logger: true,
+  logger: process.env.NODE_ENV !== 'test',
 });
 
 fastify.register(helmet);

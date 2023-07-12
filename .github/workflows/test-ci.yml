@@ -1,0 +1,51 @@
+name: API TEST
+
+# on: [push]
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    container:
+      image: node:16
+
+    services:
+      mysql-e2e:
+        image: mysql:8.0.29
+        ports:
+          - '5507:3306'
+        env:
+          MYSQL_DATABASE: siiges_e2e
+          MYSQL_USER: db_user
+          MYSQL_PASSWORD: db_password
+          MYSQL_ROOT_PASSWORD: root123
+          MYSQL_PORT: 3306
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: install
+        shell: bash
+        run: npm ci
+      - name: run e2e
+        shell: bash
+        run: npm run e2e:ci
+        env:
+          SERVER_PORT: 3000
+          SERVER_HOST: mysql-e2e
+          API_KEY: zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx
+          AUTH_JWT_SECRET: 9fRk3VN4ugE6Ipjd0xBo25lyKGbnMAWe
+          AUTH_JWT_ALGORITHM: RS256
+          AUTH_HMAC_ALGORITHM: sha256
+          AUTH_HMAC_SALT: xfdU1aP6tIzekh02LpZqAnMyT7ulrQ83
+          AUTH_HASH_ALGORITHM: md5
+          EXPIRATION_TOKEN: 1d
+          DB_HOST_MYSQL: mysql-e2e
+          DB_NAME_MYSQL: siiges_e2e
+          DB_USER_MYSQL: db_user
+          DB_PASSWORD_MYSQL: db_password
+          DB_PORT_MYSQL: 5507
