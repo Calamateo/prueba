@@ -17,13 +17,13 @@ jobs:
       mysql-e2e:
         image: mysql:8.0.29
         ports:
-          - '5507:3306'
+          - '5506:3306'
         env:
-          MYSQL_DATABASE: siiges_e2e
-          MYSQL_USER: db_user
-          MYSQL_PASSWORD: db_password
-          MYSQL_ROOT_PASSWORD: root123
-          MYSQL_PORT: 3306
+          - MYSQL_DATABASE=siiges_e2e
+          - MYSQL_USER=db_user
+          - MYSQL_PASSWORD=db_password
+          - MYSQL_ROOT_PASSWORD=root123
+          - MYSQL_PORT=3306
 
     steps:
       - name: Checkout
@@ -48,7 +48,7 @@ jobs:
           EXPIRATION_TOKEN: 1d
           DB_HOST_MYSQL: mysql-e2e
           DB_NAME_MYSQL: siiges_e2e
-          DB_USER_MYSQL: db_user
-          DB_PASSWORD_MYSQL: db_password
-          DB_PORT_MYSQL: 5507
+          DB_USER_MYSQL: root
+          DB_PASSWORD_MYSQL: root123
+          DB_PORT_MYSQL: 5506
           WHITE_LIST: mysql-e2e
