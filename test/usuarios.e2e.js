@@ -19,6 +19,7 @@ describe('test for users', () => {
   } = mysql;
   const URI = `${dbAdmin}://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
   console.log(dbAdmin, dbUser, dbPassword, URI);
+  console.log(process.env.DB_HOST_MYSQL);
   // eslint-disable-next-line no-unused-vars
   let token = null;
   const user = {
@@ -38,6 +39,7 @@ describe('test for users', () => {
     app = await HttpServer.fastify.listen(
       {
         port: config.serverPort,
+        host: config.serverHost,
       },
     );
     api = supertest(app);

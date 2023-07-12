@@ -37,7 +37,7 @@ jobs:
       - name: Run e2e tests
         run: yarn run e2e:ci
         env:
-          SERVER_PORT: 3000
+          SERVER_PORT: 9000
           SERVER_HOST: mysql-e2e
           API_KEY: zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx
           AUTH_JWT_SECRET: 9fRk3VN4ugE6Ipjd0xBo25lyKGbnMAWe
