@@ -5,12 +5,22 @@ const { models } = require('../packages/core/src/drivers/db/connection');
 const { config } = require('../packages/api-gateway/config/environment');
 const { upSeed, downSeed } = require('./utils/umzug');
 
+const dato = require('../packages/core/config/config');
+
+const { mysql } = dato;
 describe('test for users', () => {
   let api = null;
   let app = null;
   const apiKey = {
     api_key: 'zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx',
   };
+  const {
+    dbHost, dbPort, dbUser, dbPassword, dbName, dbAdmin,
+  } = mysql;
+  const USER = encodeURIComponent(dbUser);
+  const PASSWORD = encodeURIComponent(dbPassword);
+  const URI = `${dbAdmin}://${USER}:${PASSWORD}@${dbHost}:${dbPort}/${dbName}`;
+  console.log(URI);
   // eslint-disable-next-line no-unused-vars
   let token = null;
   const user = {
@@ -38,6 +48,7 @@ describe('test for users', () => {
   });
   describe('[POST] /api/v1/usuarios', () => {
     it('should new user', async () => {
+      console.log(URI);
       const { body, statusCode } = await api.post('/api/v1/usuarios')
         .send(user)
         .set(apiKey);
