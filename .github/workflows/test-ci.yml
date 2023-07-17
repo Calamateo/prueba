@@ -18,6 +18,7 @@ jobs:
         image: mysql:8.0.29
         ports:
           - 3306:3306
+          - 127.0.0.1:3306:3306
         env:
           MYSQL_DATABASE: siiges_e2e
           MYSQL_USER: db_user
