@@ -17,7 +17,7 @@ jobs:
       mysql-e2e:
         image: mysql:8.0.29
         ports:
-          - '5506:3306'
+          - 3306:3306
         env:
           MYSQL_DATABASE: siiges_e2e
           MYSQL_USER: db_user
@@ -46,9 +46,10 @@ jobs:
           AUTH_HMAC_SALT: xfdU1aP6tIzekh02LpZqAnMyT7ulrQ83
           AUTH_HASH_ALGORITHM: md5
           EXPIRATION_TOKEN: 1d
-          DB_HOST_MYSQL: mysql-e2e
+          DB_HOST_MYSQL: 127.0.0.1
           DB_NAME_MYSQL: siiges_e2e
           DB_USER_MYSQL: root
           DB_PASSWORD_MYSQL: root123
-          DB_PORT_MYSQL: 5506
+          DB_PORT_MYSQL: 3306
           WHITE_LIST: mysql-e2e
+          NODE_ENV: development
