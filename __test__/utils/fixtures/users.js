@@ -22,9 +22,31 @@ const createUser = {
     apellidoPaterno: 'Calamateo',
   },
 };
+const createUserWithoutPerson = {
+  usuario: 'tester',
+  rolId: 3,
+  correo: 'tester@gmail.com',
+  contrasena: 'Qwerty1234@',
+};
 const loginUser = {
   usuario: 'Calamateo',
   contrasena: '1234Qwerty@',
+};
+const updateUserInformation = {
+  correo: 'test@gmail.com',
+  persona: {
+    nombre: 'Bruce',
+    apellidoMaterno: 'Wayne',
+    domicilio: {
+      municipioId: 532,
+      estadoId: 14,
+      calle: 'Av Fuella',
+      numeroExterior: '1289',
+      numeroInterior: 'A',
+      codigoPostal: 44490,
+      colonia: 'Americana',
+    },
+  },
 };
 const userPasswordIncorrect = {
   usuario: 'calamateo',
@@ -43,11 +65,19 @@ const errorUserCreate = {
   contrasena: '1234Qwerty@',
 };
 
+const errorMessage = {
+  userError: "[usuario]: can't usuario with identifier: [object Object]",
+  userIntegerError: 'params/usuarioId must be integer',
+};
+
 module.exports = {
   createUser,
   createUserInitial,
+  createUserWithoutPerson,
+  updateUserInformation,
   loginUser,
   userPasswordIncorrect,
   errorPasswordUserCreate,
   errorUserCreate,
+  errorMessage,
 };

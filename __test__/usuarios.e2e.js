@@ -6,7 +6,6 @@ const {
   downServer,
   upServer,
   statusCodeName,
-  createUserData,
 } = require('./utils/fixtures/server');
 const { upSeed, downSeed } = require('./utils/umzug');
 const {
@@ -15,7 +14,9 @@ const {
   userPasswordIncorrect,
   errorPasswordUserCreate,
   errorUserCreate,
-  createUserInitial,
+  createUserWithoutPerson,
+  errorMessage,
+  updateUserInformation,
 } = require('./utils/fixtures/users');
 const { models } = require('../packages/core/src/drivers/db/connection');
 
@@ -44,6 +45,12 @@ describe('test for users', () => {
         .set(apiKey);
       expect(statusCode).toEqual(statusCodeName.conflict);
       expect(body.message).toEqual(`User ${createUser.usuario} already exists`);
+    });
+    it('should values name null', async () => {
+      const { body } = await api.post('/api/v1/usuarios')
+        .send(createUserWithoutPerson)
+        .set(apiKey);
+      expect(body.data.persona.nombre).toEqual('SIN DATO');
     });
     it('should error password user', async () => {
       const { statusCode, body } = await api.post('/api/v1/usuarios')
@@ -106,16 +113,53 @@ describe('test for users', () => {
     it('should user not found', async () => {
       const { body: error, statusCode } = await api.get('/api/v1/usuarios/-1').set(headers);
       expect(statusCode).toEqual(statusCodeName.notFound);
-      expect(error.message).toEqual("[usuario]: can't usuario with identifier: [object Object]");
+      expect(error.message).toEqual(errorMessage.userError);
     });
     it('should usuarioId must be integer', async () => {
       const { body: error, statusCode } = await api.get('/api/v1/usuarios/sca').set(headers);
-      expect(error.message).toEqual('params/usuarioId must be integer');
+      expect(error.message).toEqual(errorMessage.userIntegerError);
       expect(statusCode).toEqual(statusCodeName.badRequest);
     });
-    it('should ', async () => {
-      const data = await createUserData(createUserInitial);
-      console.log(data);
+  });
+
+  describe('[GET] /api/v1/usuarios/:{id}/detalle', () => {
+    it('should a user detail', async () => {
+      const { body, statusCode } = await api.get(`/api/v1/usuarios/${id}/detalle`)
+        .set(headers);
+      expect(statusCode).toEqual(statusCodeName.ok);
+      expect(body.data.persona.nombre).toEqual(createUser.persona.nombre);
+    });
+    it('should user not found', async () => {
+      const { body: error, statusCode } = await api.get('/api/v1/usuarios/-1/detalle').set(headers);
+      expect(statusCode).toEqual(statusCodeName.notFound);
+      expect(error.message).toEqual(errorMessage.userError);
+    });
+    it('should usuarioId must be integer', async () => {
+      const { body: error, statusCode } = await api.get('/api/v1/usuarios/sca/detalle').set(headers);
+      expect(error.message).toEqual(errorMessage.userIntegerError);
+      expect(statusCode).toEqual(statusCodeName.badRequest);
+    });
+  });
+
+  describe('[PATCH] /api/v1/usuarios/:{id}', () => {
+    it('should a user update', async () => {
+      const { body, statusCode } = await api.patch(`/api/v1/usuarios/${id}`)
+        .set(headers)
+        .send(updateUserInformation);
+      const person = body.data.persona;
+      expect(statusCode).toEqual(statusCodeName.ok);
+      expect(person.apellidoMaterno).toEqual(updateUserInformation.persona.apellidoMaterno);
+      expect(person.domicilio.codigoPostal)
+        .toEqual(updateUserInformation.persona.domicilio.codigoPostal);
+      expect(person.domicilio.colonia).toEqual(updateUserInformation.persona.domicilio.colonia);
+    });
+  });
+
+  describe('[DELETE] /api/v1/usuarios/:{id}', () => {
+    it('should a user delete', async () => {
+      await api.delete(`/api/v1/usuarios/${id}`).set(headers);
+      const { deletedAt } = await models.Usuario.findByPk(id);
+      expect(deletedAt).not.toBeNull();
     });
   });
 
