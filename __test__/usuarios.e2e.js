@@ -6,6 +6,7 @@ const {
   downServer,
   upServer,
   statusCodeName,
+  createUserAndToken,
 } = require('./utils/fixtures/server');
 const { upSeed, downSeed } = require('./utils/umzug');
 const {
@@ -17,6 +18,7 @@ const {
   createUserWithoutPerson,
   errorMessage,
   updateUserInformation,
+  createUserInitial,
 } = require('./utils/fixtures/users');
 const { models } = require('../packages/core/src/drivers/db/connection');
 
@@ -156,6 +158,10 @@ describe('test for users', () => {
   });
 
   describe('[DELETE] /api/v1/usuarios/:{id}', () => {
+    it('should ', async () => {
+      const { token: dataa } = await createUserAndToken(createUserInitial);
+      console.log(dataa);
+    });
     it('should a user delete', async () => {
       await api.delete(`/api/v1/usuarios/${id}`).set(headers);
       const { deletedAt } = await models.Usuario.findByPk(id);

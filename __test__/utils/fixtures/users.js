@@ -1,13 +1,13 @@
 const createUserInitial = {
-  usuario: 'SuperUser',
+  usuario: 'Superadmin',
   rolId: 3,
-  correo: 'superuser@yopmail.com',
+  correo: 'admin@yopmail.com',
   contrasena: '1234Qwerty@',
   actualizado: true,
   estatus: 1,
   persona: {
     nombre: 'Super',
-    apellidoPaterno: 'User',
+    apellidoPaterno: 'Admin',
   },
 };
 const createUser = {
