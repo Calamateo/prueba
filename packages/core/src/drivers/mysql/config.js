@@ -15,7 +15,7 @@ module.exports = {
     dialog: `${dbAdmin}`,
     dialectOptions: {
       ssl: {
-        require: true,
+        rejectUnauthorized: false,
       },
     },
   },
@@ -24,7 +24,7 @@ module.exports = {
     dialog: `${dbAdmin}`,
     dialectOptions: {
       ssl: {
-        require: true,
+        rejectUnauthorized: false,
       },
     },
   },
