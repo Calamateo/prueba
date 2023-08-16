@@ -22,5 +22,10 @@ module.exports = {
   production: {
     url: URI,
     dialog: `${dbAdmin}`,
+    dialectOptions: {
+      ssl: {
+        require: true,
+      },
+    },
   },
 };

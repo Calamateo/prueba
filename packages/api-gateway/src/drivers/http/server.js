@@ -69,6 +69,7 @@ const start = async () => {
       Logger.info(`Server listening at ${address}`);
     },
   );
+  console.log(process.env.NODE_ENV);
 };
 
 module.exports = { start, fastify };
