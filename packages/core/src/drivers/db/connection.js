@@ -17,7 +17,7 @@ const sequelize = new Sequelize(URI, {
   logging: process.env.NODE_ENV !== 'test',
   dialectOptions: {
     ssl: {
-      require: true,
+      rejectUnauthorized: false,
     },
   },
 });
