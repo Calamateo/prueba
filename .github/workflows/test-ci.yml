@@ -54,3 +54,5 @@ jobs:
           DB_PORT_MYSQL: 3306
           WHITE_LIST: mysql
           NODE_ENV: development
+          DATABASE: mysql
+
