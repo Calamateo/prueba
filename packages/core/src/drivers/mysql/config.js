@@ -13,6 +13,11 @@ module.exports = {
   development: {
     url: URI,
     dialog: `${dbAdmin}`,
+    dialectOptions: {
+      ssl: {
+        require: true,
+      },
+    },
   },
   production: {
     url: URI,
